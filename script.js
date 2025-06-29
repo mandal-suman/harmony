@@ -1,5 +1,5 @@
 const CLIENT_ID = '2a6bbce3df194ece9934b9d6d6d6c3c3';
-const REDIRECT_URI = encodeURIComponent('https://mandal-suman.github.io/harmony'); // Must match Spotify app settings
+const REDIRECT_URI = encodeURIComponent('https://mandal-suman.github.io/harmony/callback.html'); // Must match Spotify app settings
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
 const RESPONSE_TYPE = 'token';
 const SCOPE = 'user-read-private user-read-email user-read-playback-state user-modify-playback-state streaming user-read-recently-played user-top-read';
