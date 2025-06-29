@@ -1,15 +1,13 @@
 const CLIENT_ID = '2a6bbce3df194ece9934b9d6d6d6c3c3';
-const REDIRECT_URI = encodeURIComponent('https://mandal-suman.github.io/harmony/callback.html'); // Must match Spotify app settings
+const REDIRECT_URI = 'https://mandal-suman.github.io/harmony/callback.html';
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
 const RESPONSE_TYPE = 'token';
 const SCOPE = 'user-read-private user-read-email user-read-playback-state user-modify-playback-state streaming user-read-recently-played user-top-read';
 
 function handleLogin() {
-    window.open(
-        `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`,
-        'SpotifyAuth',
-        'width=500,height=600'
-    );
+    // Note: Don't encodeURIComponent the entire URI, just the components if needed
+    const authUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPE)}`;
+    window.location.href = authUrl;
 }
 
 // DOM Elements
@@ -42,20 +40,18 @@ let deviceId = null;
 let progressInterval = null;
 
 // Initialize the app
-function init() {
-    setupEventListeners();
-    // Add this to your init() function
-    window.addEventListener('message', (event) => {
-        if (event.data.type === 'SPOTIFY_AUTH') {
-            accessToken = event.data.token;
-            fetchUserProfile();
-            welcomeScreen.classList.add('hidden');
-            content.classList.remove('hidden');
-        } else if (event.data.type === 'SPOTIFY_AUTH_ERROR') {
-            alert('Authentication failed. Please try again.');
-        }
-    });
-}
+window.addEventListener('message', (event) => {
+    // Verify the origin is your GitHub Pages domain
+    if (event.origin !== "https://mandal-suman.github.io") return;
+
+    if (event.data.type === 'SPOTIFY_AUTH') {
+        accessToken = event.data.token;
+        // Proceed with your app (fetch user profile, etc.)
+        fetchUserProfile();
+    } else if (event.data.type === 'SPOTIFY_AUTH_ERROR') {
+        alert('Authentication failed. Please try again.');
+    }
+});
 
 // Check if user is already authenticated
 function checkAuth() {
