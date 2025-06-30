@@ -2,24 +2,43 @@
 <html>
 
 <head>
-    <title>Authentication Callback</title>
+    <title>Spotify Auth Callback</title>
     <script>
-        // Extract token from URL hash and pass it to the main window
         window.addEventListener('DOMContentLoaded', () => {
-            const hash = window.location.hash.substring(1);
-            const params = new URLSearchParams(hash);
-            const token = params.get('access_token');
+            try {
+                // Extract the hash parameters
+                const hash = window.location.hash.substring(1);
+                const params = new URLSearchParams(hash);
 
-            if (token) {
-                window.opener.postMessage({
-                    type: 'SPOTIFY_AUTH',
-                    token: token
-                }, window.opener.location.origin);
+                const accessToken = params.get('access_token');
+                const expiresIn = params.get('expires_in');
+                const error = params.get('error');
+
+                if (error) {
+                    // Send error message back to main window
+                    window.opener.postMessage({
+                        type: 'SPOTIFY_AUTH_ERROR',
+                        error: error,
+                        errorDescription: params.get('error_description')
+                    }, 'https://mandal-suman.github.io');
+                } else if (accessToken) {
+                    // Send success message back to main window
+                    window.opener.postMessage({
+                        type: 'SPOTIFY_AUTH_SUCCESS',
+                        accessToken: accessToken,
+                        expiresIn: expiresIn || 3600
+                    }, 'https://mandal-suman.github.io');
+                }
+
+                // Close this popup
                 window.close();
-            } else {
+            } catch (err) {
+                console.error('Error in callback:', err);
                 window.opener.postMessage({
-                    type: 'SPOTIFY_AUTH_ERROR'
-                }, window.opener.location.origin);
+                    type: 'SPOTIFY_AUTH_ERROR',
+                    error: 'callback_error',
+                    errorDescription: err.message
+                }, 'https://mandal-suman.github.io');
                 window.close();
             }
         });
@@ -27,7 +46,7 @@
 </head>
 
 <body>
-    <p>Processing authentication...</p>
+    <p>Completing authentication... You can close this window if it doesn't close automatically.</p>
 </body>
 
 </html>

@@ -1,7 +1,6 @@
-// Spotify API Configuration
 const SPOTIFY_CONFIG = {
-    CLIENT_ID: '9fe8f88aa58a475395328a1d600f5129', // Replace with your client ID
-    REDIRECT_URI: window.location.origin + '/callback.html', // Must match Spotify Dashboard
+    CLIENT_ID: '9fe8f88aa58a475395328a1d600f5129', // Replace with your actual client ID
+    REDIRECT_URI: 'https://mandal-suman.github.io/harmony/callback.html',
     AUTH_ENDPOINT: 'https://accounts.spotify.com/authorize',
     RESPONSE_TYPE: 'token',
     SCOPE: [
@@ -15,6 +14,39 @@ const SPOTIFY_CONFIG = {
     ].join(' '),
     SHOW_DIALOG: false
 };
+
+function handleLogin() {
+    // Build the authorization URL
+    const authUrl = `${SPOTIFY_CONFIG.AUTH_ENDPOINT}?client_id=${SPOTIFY_CONFIG.CLIENT_ID}` +
+        `&redirect_uri=${encodeURIComponent(SPOTIFY_CONFIG.REDIRECT_URI)}` +
+        `&response_type=${SPOTIFY_CONFIG.RESPONSE_TYPE}` +
+        `&scope=${encodeURIComponent(SPOTIFY_CONFIG.SCOPE)}` +
+        `&show_dialog=${SPOTIFY_CONFIG.SHOW_DIALOG}`;
+
+    // Open auth window - important to specify the exact origin
+    const authWindow = window.open(
+        authUrl,
+        'Spotify Auth',
+        'width=500,height=700,scrollbars=yes,resizable=yes'
+    );
+
+    // Check for popup blockers
+    if (!authWindow) {
+        alert('Popup was blocked. Please allow popups for this site and try again.');
+    }
+}
+
+// Update the message listener to specify exact origin
+window.addEventListener('message', (event) => {
+    // Only accept messages from our own origin
+    if (event.origin !== 'https://mandal-suman.github.io') return;
+
+    if (event.data.type === 'SPOTIFY_AUTH_SUCCESS') {
+        handleAuthSuccess(event.data);
+    } else if (event.data.type === 'SPOTIFY_AUTH_ERROR') {
+        handleAuthError(event.data);
+    }
+}, false);
 
 // DOM Elements
 const elements = {
