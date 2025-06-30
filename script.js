@@ -1,6 +1,6 @@
 // Spotify API Configuration
 const SPOTIFY_CONFIG = {
-    CLIENT_ID: '2a6bbce3df194ece9934b9d6d6d6c3c3', // Replace with your client ID
+    CLIENT_ID: '9fe8f88aa58a475395328a1d600f5129', // Replace with your client ID
     REDIRECT_URI: window.location.origin + '/callback.html', // Must match Spotify Dashboard
     AUTH_ENDPOINT: 'https://accounts.spotify.com/authorize',
     RESPONSE_TYPE: 'token',
