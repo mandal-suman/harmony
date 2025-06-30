@@ -1,114 +1,181 @@
-const CLIENT_ID = '2a6bbce3df194ece9934b9d6d6d6c3c3';
-const REDIRECT_URI = 'https://mandal-suman.github.io/harmony/callback.html';
-const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
-const RESPONSE_TYPE = 'token';
-const SCOPE = 'user-read-private user-read-email user-read-playback-state user-modify-playback-state streaming user-read-recently-played user-top-read';
-
-function handleLogin() {
-    // Note: Don't encodeURIComponent the entire URI, just the components if needed
-    const authUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPE)}`;
-    window.location.href = authUrl;
-}
+// Spotify API Configuration
+const SPOTIFY_CONFIG = {
+    CLIENT_ID: '2a6bbce3df194ece9934b9d6d6d6c3c3', // Replace with your client ID
+    REDIRECT_URI: window.location.origin + '/callback.html', // Must match Spotify Dashboard
+    AUTH_ENDPOINT: 'https://accounts.spotify.com/authorize',
+    RESPONSE_TYPE: 'token',
+    SCOPE: [
+        'user-read-private',
+        'user-read-email',
+        'user-read-playback-state',
+        'user-modify-playback-state',
+        'streaming',
+        'user-read-recently-played',
+        'user-top-read'
+    ].join(' '),
+    SHOW_DIALOG: false
+};
 
 // DOM Elements
-const loginBtn = document.getElementById('login-btn');
-const userInfo = document.getElementById('user-info');
-const userAvatar = document.getElementById('user-avatar');
-const userName = document.getElementById('user-name');
-const welcomeScreen = document.getElementById('welcome-screen');
-const content = document.getElementById('content');
-const searchInput = document.getElementById('search-input');
-const searchBtn = document.getElementById('search-btn');
-const tabBtns = document.querySelectorAll('.tab-btn');
-const results = document.getElementById('results');
-const player = document.getElementById('player');
-const nowPlayingImg = document.getElementById('now-playing-img');
-const nowPlayingName = document.getElementById('now-playing-name');
-const nowPlayingArtist = document.getElementById('now-playing-artist');
-const playBtn = document.getElementById('play-btn');
-const prevBtn = document.getElementById('prev-btn');
-const nextBtn = document.getElementById('next-btn');
-const progressBar = document.getElementById('progress-bar');
-const currentTimeEl = document.getElementById('current-time');
-const durationEl = document.getElementById('duration');
+const elements = {
+    loginBtn: document.getElementById('login-btn'),
+    userInfo: document.getElementById('user-info'),
+    userAvatar: document.getElementById('user-avatar'),
+    userName: document.getElementById('user-name'),
+    welcomeScreen: document.getElementById('welcome-screen'),
+    content: document.getElementById('content'),
+    searchInput: document.getElementById('search-input'),
+    searchBtn: document.getElementById('search-btn'),
+    tabBtns: document.querySelectorAll('.tab-btn'),
+    results: document.getElementById('results'),
+    player: document.getElementById('player'),
+    nowPlayingImg: document.getElementById('now-playing-img'),
+    nowPlayingName: document.getElementById('now-playing-name'),
+    nowPlayingArtist: document.getElementById('now-playing-artist'),
+    playBtn: document.getElementById('play-btn'),
+    prevBtn: document.getElementById('prev-btn'),
+    nextBtn: document.getElementById('next-btn'),
+    progressBar: document.getElementById('progress-bar'),
+    currentTimeEl: document.getElementById('current-time'),
+    durationEl: document.getElementById('duration')
+};
 
-// Global variables
-let accessToken = null;
-let currentTab = 'tracks';
-let currentTrack = null;
-let deviceId = null;
-let progressInterval = null;
+// App State
+const state = {
+    accessToken: null,
+    refreshToken: null,
+    tokenExpiration: 0,
+    currentTab: 'tracks',
+    currentTrack: null,
+    deviceId: null,
+    player: null,
+    progressInterval: null,
+    isAuthenticated: false
+};
 
-// Initialize the app
-window.addEventListener('message', (event) => {
-    // Verify the origin is your GitHub Pages domain
-    if (event.origin !== "https://mandal-suman.github.io") return;
+// Initialize the application
+function init() {
+    setupEventListeners();
+    checkLocalStorage();
+    setupMessageListener();
+}
 
-    if (event.data.type === 'SPOTIFY_AUTH') {
-        accessToken = event.data.token;
-        // Proceed with your app (fetch user profile, etc.)
-        fetchUserProfile();
-    } else if (event.data.type === 'SPOTIFY_AUTH_ERROR') {
-        alert('Authentication failed. Please try again.');
-    }
-});
-
-// Check if user is already authenticated
-function checkAuth() {
-    const hash = window.location.hash.substring(1);
-    const params = new URLSearchParams(hash);
-    const token = params.get('access_token');
-
-    if (token) {
-        accessToken = token;
-        window.location.hash = '';
-        fetchUserProfile();
-        welcomeScreen.classList.add('hidden');
-        content.classList.remove('hidden');
+// Check for existing session in localStorage
+function checkLocalStorage() {
+    const authData = JSON.parse(localStorage.getItem('spotify_auth_data'));
+    if (authData && authData.accessToken && new Date().getTime() < authData.tokenExpiration) {
+        state.accessToken = authData.accessToken;
+        state.refreshToken = authData.refreshToken;
+        state.tokenExpiration = authData.tokenExpiration;
+        state.isAuthenticated = true;
+        updateUIAfterAuth();
+        initializePlayer();
     }
 }
 
 // Setup event listeners
 function setupEventListeners() {
-    loginBtn.addEventListener('click', handleLogin);
-    searchBtn.addEventListener('click', handleSearch);
-    searchInput.addEventListener('keypress', (e) => {
+    elements.loginBtn.addEventListener('click', handleLogin);
+    elements.searchBtn.addEventListener('click', handleSearch);
+    elements.searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') handleSearch();
     });
 
-    tabBtns.forEach(btn => {
+    elements.tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            tabBtns.forEach(b => b.classList.remove('active'));
+            elements.tabBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            currentTab = btn.dataset.tab;
-            if (searchInput.value) handleSearch();
+            state.currentTab = btn.dataset.tab;
+            if (elements.searchInput.value) handleSearch();
         });
     });
 
-    playBtn.addEventListener('click', togglePlay);
-    prevBtn.addEventListener('click', playPrevious);
-    nextBtn.addEventListener('click', playNext);
-    progressBar.addEventListener('input', seekTo);
+    elements.playBtn.addEventListener('click', togglePlay);
+    elements.prevBtn.addEventListener('click', playPrevious);
+    elements.nextBtn.addEventListener('click', playNext);
+    elements.progressBar.addEventListener('input', seekTo);
 }
 
-// Handle Spotify login
+// Setup message listener for auth callback
+function setupMessageListener() {
+    window.addEventListener('message', (event) => {
+        // Verify the message is from our own origin
+        if (event.origin !== window.location.origin) return;
+
+        if (event.data.type === 'SPOTIFY_AUTH_SUCCESS') {
+            handleAuthSuccess(event.data);
+        } else if (event.data.type === 'SPOTIFY_AUTH_ERROR') {
+            handleAuthError(event.data);
+        }
+    });
+}
+
+// Handle login with Spotify
 function handleLogin() {
-    window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
+    const authUrl = `${SPOTIFY_CONFIG.AUTH_ENDPOINT}?client_id=${SPOTIFY_CONFIG.CLIENT_ID}` +
+        `&redirect_uri=${encodeURIComponent(SPOTIFY_CONFIG.REDIRECT_URI)}` +
+        `&response_type=${SPOTIFY_CONFIG.RESPONSE_TYPE}` +
+        `&scope=${encodeURIComponent(SPOTIFY_CONFIG.SCOPE)}` +
+        `&show_dialog=${SPOTIFY_CONFIG.SHOW_DIALOG}`;
+
+    // Open auth window
+    const authWindow = window.open(
+        authUrl,
+        'Spotify Auth',
+        'width=500,height=700,scrollbars=yes,resizable=yes'
+    );
+
+    // Check if window was blocked
+    if (!authWindow) {
+        alert('Popup was blocked. Please allow popups for this site.');
+    }
 }
 
-// Fetch user profile
+// Handle successful authentication
+function handleAuthSuccess(data) {
+    state.accessToken = data.accessToken;
+    state.tokenExpiration = new Date().getTime() + (data.expiresIn * 1000);
+
+    // Store auth data in localStorage
+    localStorage.setItem('spotify_auth_data', JSON.stringify({
+        accessToken: state.accessToken,
+        tokenExpiration: state.tokenExpiration
+    }));
+
+    state.isAuthenticated = true;
+    updateUIAfterAuth();
+    initializePlayer();
+}
+
+// Handle authentication error
+function handleAuthError(error) {
+    console.error('Authentication error:', error);
+    alert('Failed to authenticate with Spotify. Please try again.');
+}
+
+// Update UI after successful authentication
+function updateUIAfterAuth() {
+    elements.loginBtn.classList.add('hidden');
+    elements.userInfo.classList.remove('hidden');
+    elements.welcomeScreen.classList.add('hidden');
+    elements.content.classList.remove('hidden');
+
+    // Fetch user profile
+    fetchUserProfile();
+}
+
+// Fetch user profile from Spotify
 async function fetchUserProfile() {
     try {
         const response = await fetch('https://api.spotify.com/v1/me', {
             headers: {
-                'Authorization': `Bearer ${accessToken}`
+                'Authorization': `Bearer ${state.accessToken}`
             }
         });
 
         if (response.ok) {
             const data = await response.json();
             displayUserInfo(data);
-            initializePlayer();
         } else {
             throw new Error('Failed to fetch user profile');
         }
@@ -117,44 +184,16 @@ async function fetchUserProfile() {
     }
 }
 
-// Display user info
+// Display user information
 function displayUserInfo(user) {
-    loginBtn.classList.add('hidden');
-    userInfo.classList.remove('hidden');
-    userName.textContent = user.display_name || user.id;
+    elements.userName.textContent = user.display_name || user.id;
     if (user.images && user.images.length > 0) {
-        userAvatar.src = user.images[0].url;
+        elements.userAvatar.src = user.images[0].url;
     }
 }
 
 // Initialize Spotify Web Playback SDK
 function initializePlayer() {
-    window.onSpotifyWebPlaybackSDKReady = () => {
-        const player = new Spotify.Player({
-            name: 'Music Experience Web',
-            getOAuthToken: cb => { cb(accessToken); },
-            volume: 0.5
-        });
-
-        player.addListener('ready', ({ device_id }) => {
-            console.log('Ready with Device ID', device_id);
-            deviceId = device_id;
-            transferPlayback(device_id);
-        });
-
-        player.addListener('player_state_changed', (state) => {
-            if (state) {
-                updatePlayerUI(state);
-            }
-        });
-
-        player.connect().then(success => {
-            if (success) {
-                console.log('Connected to Spotify player');
-            }
-        });
-    };
-
     // Load the Spotify Web Playback SDK script
     if (!document.getElementById('spotify-player-script')) {
         const script = document.createElement('script');
@@ -162,6 +201,36 @@ function initializePlayer() {
         script.src = 'https://sdk.scdn.co/spotify-player.js';
         document.body.appendChild(script);
     }
+
+    // Wait for SDK to be ready
+    window.onSpotifyWebPlaybackSDKReady = () => {
+        state.player = new Spotify.Player({
+            name: 'Music Experience Web',
+            getOAuthToken: cb => { cb(state.accessToken); },
+            volume: 0.5
+        });
+
+        // Ready event
+        state.player.addListener('ready', ({ device_id }) => {
+            console.log('Ready with Device ID', device_id);
+            state.deviceId = device_id;
+            transferPlayback(device_id);
+        });
+
+        // Player state changed
+        state.player.addListener('player_state_changed', (state) => {
+            if (state) {
+                updatePlayerUI(state);
+            }
+        });
+
+        // Connect to player
+        state.player.connect().then(success => {
+            if (success) {
+                console.log('Connected to Spotify player');
+            }
+        });
+    };
 }
 
 // Transfer playback to our app
@@ -169,28 +238,26 @@ function transferPlayback(deviceId) {
     fetch('https://api.spotify.com/v1/me/player', {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${accessToken}`,
+            'Authorization': `Bearer ${state.accessToken}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             device_ids: [deviceId],
             play: false
         })
-    }).then(response => {
-        if (!response.ok) {
-            console.error('Failed to transfer playback');
-        }
+    }).catch(error => {
+        console.error('Failed to transfer playback:', error);
     });
 }
 
-// Handle search
+// Handle search functionality
 async function handleSearch() {
-    const query = searchInput.value.trim();
+    const query = elements.searchInput.value.trim();
     if (!query) return;
 
     try {
         let endpoint;
-        switch (currentTab) {
+        switch (state.currentTab) {
             case 'tracks':
                 endpoint = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=12`;
                 break;
@@ -206,7 +273,7 @@ async function handleSearch() {
 
         const response = await fetch(endpoint, {
             headers: {
-                'Authorization': `Bearer ${accessToken}`
+                'Authorization': `Bearer ${state.accessToken}`
             }
         });
 
@@ -218,33 +285,33 @@ async function handleSearch() {
         }
     } catch (error) {
         console.error('Error searching:', error);
-        results.innerHTML = '<p>Failed to load results. Please try again.</p>';
+        elements.results.innerHTML = '<p>Failed to load results. Please try again.</p>';
     }
 }
 
 // Display search results
 function displayResults(data) {
-    results.innerHTML = '';
+    elements.results.innerHTML = '';
 
-    if (currentTab === 'tracks' && data.tracks) {
+    if (state.currentTab === 'tracks' && data.tracks) {
         data.tracks.items.forEach(track => {
             const trackCard = createTrackCard(track);
-            results.appendChild(trackCard);
+            elements.results.appendChild(trackCard);
         });
-    } else if (currentTab === 'artists' && data.artists) {
+    } else if (state.currentTab === 'artists' && data.artists) {
         data.artists.items.forEach(artist => {
             const artistCard = createArtistCard(artist);
-            results.appendChild(artistCard);
+            elements.results.appendChild(artistCard);
         });
-    } else if (currentTab === 'albums' && data.albums) {
+    } else if (state.currentTab === 'albums' && data.albums) {
         data.albums.items.forEach(album => {
             const albumCard = createAlbumCard(album);
-            results.appendChild(albumCard);
+            elements.results.appendChild(albumCard);
         });
     }
 }
 
-// Create track card
+// Create track card element
 function createTrackCard(track) {
     const card = document.createElement('div');
     card.className = 'track-card';
@@ -271,7 +338,7 @@ function createTrackCard(track) {
     return card;
 }
 
-// Create artist card
+// Create artist card element
 function createArtistCard(artist) {
     const card = document.createElement('div');
     card.className = 'artist-card';
@@ -294,14 +361,13 @@ function createArtistCard(artist) {
     card.appendChild(type);
 
     card.addEventListener('click', () => {
-        // In a more complete app, you might navigate to artist details
         alert(`Viewing ${artist.name}'s profile would be implemented here`);
     });
 
     return card;
 }
 
-// Create album card
+// Create album card element
 function createAlbumCard(album) {
     const card = document.createElement('div');
     card.className = 'album-card';
@@ -324,7 +390,6 @@ function createAlbumCard(album) {
     card.appendChild(artist);
 
     card.addEventListener('click', () => {
-        // In a more complete app, you might navigate to album details
         alert(`Viewing ${album.name} album would be implemented here`);
     });
 
@@ -333,24 +398,22 @@ function createAlbumCard(album) {
 
 // Play a track
 function playTrack(trackUri) {
-    if (!deviceId) {
+    if (!state.deviceId) {
         alert('Player not ready. Please try again in a moment.');
         return;
     }
 
-    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${state.deviceId}`, {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${accessToken}`,
+            'Authorization': `Bearer ${state.accessToken}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             uris: [trackUri]
         })
-    }).then(response => {
-        if (!response.ok) {
-            console.error('Failed to play track');
-        }
+    }).catch(error => {
+        console.error('Failed to play track:', error);
     });
 }
 
@@ -358,16 +421,15 @@ function playTrack(trackUri) {
 function togglePlay() {
     fetch('https://api.spotify.com/v1/me/player', {
         headers: {
-            'Authorization': `Bearer ${accessToken}`
+            'Authorization': `Bearer ${state.accessToken}`
         }
     }).then(response => {
         if (response.ok) {
             return response.json();
-        } else {
-            throw new Error('Failed to get player state');
         }
-    }).then(state => {
-        if (state.is_playing) {
+        throw new Error('Failed to get player state');
+    }).then(playerState => {
+        if (playerState.is_playing) {
             pausePlayback();
         } else {
             resumePlayback();
@@ -382,15 +444,10 @@ function pausePlayback() {
     fetch('https://api.spotify.com/v1/me/player/pause', {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${accessToken}`
+            'Authorization': `Bearer ${state.accessToken}`
         }
-    }).then(response => {
-        if (!response.ok) {
-            console.error('Failed to pause playback');
-            playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            clearInterval(progressInterval);
-            progressInterval = null;
-        }
+    }).catch(error => {
+        console.error('Failed to pause playback:', error);
     });
 }
 
@@ -399,12 +456,10 @@ function resumePlayback() {
     fetch('https://api.spotify.com/v1/me/player/play', {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${accessToken}`
+            'Authorization': `Bearer ${state.accessToken}`
         }
-    }).then(response => {
-        if (!response.ok) {
-            console.error('Failed to resume playback');
-        }
+    }).catch(error => {
+        console.error('Failed to resume playback:', error);
     });
 }
 
@@ -413,12 +468,10 @@ function playPrevious() {
     fetch('https://api.spotify.com/v1/me/player/previous', {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${accessToken}`
+            'Authorization': `Bearer ${state.accessToken}`
         }
-    }).then(response => {
-        if (!response.ok) {
-            console.error('Failed to play previous track');
-        }
+    }).catch(error => {
+        console.error('Failed to play previous track:', error);
     });
 }
 
@@ -427,85 +480,79 @@ function playNext() {
     fetch('https://api.spotify.com/v1/me/player/next', {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${accessToken}`
+            'Authorization': `Bearer ${state.accessToken}`
         }
-    }).then(response => {
-        if (!response.ok) {
-            console.error('Failed to play next track');
-        }
+    }).catch(error => {
+        console.error('Failed to play next track:', error);
     });
 }
 
 // Seek to position in track
 function seekTo() {
-    const positionMs = Math.floor(progressBar.value * currentTrack.duration_ms / 100);
+    const positionMs = Math.floor(elements.progressBar.value * state.currentTrack.duration_ms / 100);
 
     fetch(`https://api.spotify.com/v1/me/player/seek?position_ms=${positionMs}`, {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${accessToken}`
+            'Authorization': `Bearer ${state.accessToken}`
         }
-    }).then(response => {
-        if (!response.ok) {
-            console.error('Failed to seek');
-        }
+    }).catch(error => {
+        console.error('Failed to seek:', error);
     });
 }
 
 // Update player UI with current track info
-function updatePlayerUI(state) {
-    if (!state) return;
+function updatePlayerUI(playerState) {
+    elements.player.classList.remove('hidden');
 
-    player.classList.remove('hidden');
+    const track = playerState.track_window.current_track;
+    state.currentTrack = track;
 
-    const track = state.track_window.current_track;
-    currentTrack = track;
+    elements.nowPlayingImg.src = track.album.images[0].url;
+    elements.nowPlayingName.textContent = track.name;
+    elements.nowPlayingArtist.textContent = track.artists.map(a => a.name).join(', ');
 
-    nowPlayingImg.src = track.album.images[0].url;
-    nowPlayingName.textContent = track.name;
-    nowPlayingArtist.textContent = track.artists.map(a => a.name).join(', ');
-
-    if (state.paused) {
-        playBtn.innerHTML = '<i class="fas fa-play"></i>';
-        clearInterval(progressInterval);
-        progressInterval = null;
+    if (playerState.paused) {
+        elements.playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        clearInterval(state.progressInterval);
+        state.progressInterval = null;
     } else {
-        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        if (!progressInterval) {
-            progressInterval = setInterval(updateProgressBar, 1000);
+        elements.playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        if (!state.progressInterval) {
+            state.progressInterval = setInterval(updateProgressBar, 1000);
         }
     }
 
-    updateProgressBar(state.position, track.duration_ms);
+    updateProgressBar(playerState.position, track.duration_ms);
 }
 
 // Update progress bar
 function updateProgressBar(position = null, duration = null) {
     if (position === null || duration === null) {
-        if (!currentTrack) return;
+        if (!state.currentTrack) return;
 
         fetch('https://api.spotify.com/v1/me/player', {
             headers: {
-                'Authorization': `Bearer ${accessToken}`
+                'Authorization': `Bearer ${state.accessToken}`
             }
         }).then(response => {
             if (response.ok) {
                 return response.json();
             }
             return null;
-        }).then(state => {
-            if (state) {
-                const progress = (state.position_ms / state.duration_ms) * 100;
-                progressBar.value = progress;
-                currentTimeEl.textContent = formatTime(state.position_ms);
-                durationEl.textContent = formatTime(state.duration_ms);
+        }).then(playerState => {
+            if (playerState) {
+                const progress = (playerState.position_ms / playerState.duration_ms) * 100;
+                elements.progressBar.value = progress;
+                elements.currentTimeEl.textContent = formatTime(playerState.position_ms);
+                elements.durationEl.textContent = formatTime(playerState.duration_ms);
             }
         });
     } else {
         const progress = (position / duration) * 100;
-        progressBar.value = progress;
-        currentTimeEl.textContent = formatTime(position);
-        durationEl.textContent = formatTime(duration);
+        elements.progressBar.value = progress;
+        elements.currentTimeEl.textContent = formatTime(position);
+        elements.durationEl.textContent = formatTime(duration);
     }
 }
 
