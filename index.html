@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmony - Coming Soon</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --accent: #00b894;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 25% 50%, rgba(108, 92, 231, 0.1) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--dark);
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .countdown-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            min-width: 100px;
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dark);
+            opacity: 0.6;
+        }
+
+        .cta-form {
+            display: flex;
+            max-width: 500px;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .cta-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 8px 0 0 8px;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 2rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #5649c5;
+        }
+
+        .success-message {
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .app-preview {
+            margin: 3rem 0;
+            position: relative;
+            max-width: 800px;
+            width: 100%;
+            height: 400px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .preview-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 2;
+        }
+
+        .preview-content {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            display: flex;
+        }
+
+        .sidebar {
+            width: 25%;
+            background: white;
+            padding: 1.5rem;
+            border-right: 1px solid #eee;
+        }
+
+        .main-view {
+            flex: 1;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .task-item {
+            background: white;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+            display: flex;
+            align-items: center;
+        }
+
+        .task-checkbox {
+            margin-right: 1rem;
+            accent-color: var(--accent);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 65%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--dark);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .countdown {
+                gap: 1rem;
+            }
+
+            .countdown-item {
+                min-width: 80px;
+                padding: 1rem;
+            }
+
+            .countdown-number {
+                font-size: 2rem;
+            }
+
+            .cta-form {
+                flex-direction: column;
+            }
+
+            .cta-input {
+                border-radius: 8px;
+                margin-bottom: 0.5rem;
+            }
+
+            .cta-button {
+                border-radius: 8px;
+                padding: 1rem;
+            }
+
+            .app-preview {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">H</div>
+                <span>Harmony</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <h1>Align Your Goals. Find Your Harmony.</h1>
+            <p class="tagline">The all-in-one productivity platform that helps you plan, track, and achieve your goals
+                with effortless synchronization across all areas of your life.</p>
+
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+
+            <form class="cta-form" id="notify-form">
+                <input type="email" class="cta-input" placeholder="Enter your email for early access" required>
+                <button type="submit" class="cta-button">Notify Me</button>
+            </form>
+            <div class="success-message" id="success-message">Thank you! We'll notify you when we launch.</div>
+
+            <div class="app-preview">
+                <div class="preview-overlay">
+                    <div class="logo">
+                        <div class="logo-icon">H</div>
+                        <span>Harmony</span>
+                    </div>
+                </div>
+                <div class="preview-content">
+                    <div class="sidebar">
+                        <h3>My Goals</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <p>65% complete</p>
+                    </div>
+                    <div class="main-view">
+                        <h3>Today's Tasks</h3>
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <span>Morning meditation</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox" checked>
+                            <span>Review quarterly goals</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <span>Work on project milestone</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <span>Evening workout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="#" class="social-link">T</a>
+                <a href="#" class="social-link">F</a>
+                <a href="#" class="social-link">I</a>
+                <a href="#" class="social-link">L</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2023 Harmony. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Set the launch date (YYYY, MM-1, DD, HH, MM, SS)
+        const launchDate = new Date(2023, 11, 31, 0, 0, 0);
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = launchDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
+        // Handle form submission
+        document.getElementById('notify-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = this.querySelector('input').value;
+
+            // In a real app, you would send this to your backend
+            console.log('Email submitted:', email);
+
+            // Show success message
+            document.getElementById('success-message').style.display = 'block';
+            this.reset();
+
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('success-message').style.display = 'none';
+            }, 5000);
+        });
+
+        // Animate the preview overlay on hover
+        const preview = document.querySelector('.app-preview');
+        const overlay = document.querySelector('.preview-overlay');
+
+        preview.addEventListener('mouseenter', () => {
+            overlay.style.opacity = '0';
+        });
+
+        preview.addEventListener('mouseleave', () => {
+            overlay.style.opacity = '1';
+        });
+    </script>
+</body>
+
+</html>
