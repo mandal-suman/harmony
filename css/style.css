@@ -58,6 +58,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
+    cursor: pointer;
     color: var(--primary-color);
 }
 
