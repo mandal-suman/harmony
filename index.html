@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Harmony: Visual Goal Planning & Life Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -279,6 +279,31 @@
                 </div>
             </section>
         </main>
+    </div>
+    <!-- Mobile Menu (for small screens) -->
+    <div class="mobile-menu">
+        <nav class="mobile-menu-nav">
+            <button class="mobile-menu-btn active" data-section="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+            <button class="mobile-menu-btn" data-section="goals">
+                <i class="fas fa-bullseye"></i>
+                <span>Goals</span>
+            </button>
+            <button class="mobile-menu-btn" data-section="habits">
+                <i class="fas fa-check-circle"></i>
+                <span>Habits</span>
+            </button>
+            <button class="mobile-menu-btn" data-section="journal">
+                <i class="fas fa-book"></i>
+                <span>Journal</span>
+            </button>
+            <button class="mobile-menu-btn" data-section="vision-board">
+                <i class="fas fa-images"></i>
+                <span>Vision</span>
+            </button>
+        </nav>
     </div>
 
     <script src="js/main.js"></script>

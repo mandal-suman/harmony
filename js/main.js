@@ -141,3 +141,58 @@ function updateRecentJournal() {
 document.getElementById('add-journal-btn')?.addEventListener('click', function () {
     document.querySelector('.nav-btn[data-section="journal"]').click();
 });
+
+// Mobile navigation
+document.querySelectorAll('.mobile-menu-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        const targetSection = this.getAttribute('data-section');
+
+        // Update active button
+        document.querySelectorAll('.mobile-menu-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        this.classList.add('active');
+
+        // Also update the regular nav if visible
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.getAttribute('data-section') === targetSection) {
+                btn.classList.add('active');
+            }
+        });
+
+        // Show target section
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(targetSection).classList.add('active');
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+    });
+});
+
+// Handle window resize
+window.addEventListener('resize', function () {
+    // Close any open modals if screen gets too small
+    if (window.innerWidth < 768) {
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.style.display = 'none';
+        });
+    }
+});
+
+// Prevent zooming on input focus on mobile
+document.addEventListener('DOMContentLoaded', function () {
+    let viewport = document.querySelector('meta[name="viewport"]');
+
+    window.addEventListener('focusin', function () {
+        if (window.innerWidth < 768) {
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+        }
+    });
+
+    window.addEventListener('focusout', function () {
+        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+    });
+});

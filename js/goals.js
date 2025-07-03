@@ -59,21 +59,26 @@ function createGoalCard(goal) {
     goalCard.draggable = true;
     goalCard.dataset.id = goal.id;
 
+    // Simplified content for small screens
     const typeIcon = getGoalTypeIcon(goal.type);
     const priorityColor = getPriorityColor(goal.priority);
 
     let dueDate = '';
     if (goal.targetDate) {
         const dateObj = new Date(goal.targetDate);
-        dueDate = `Due: ${dateObj.toLocaleDateString()}`;
+        dueDate = `<span class="goal-due">${dateObj.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>`;
     }
 
     goalCard.innerHTML = `
-        <h4>${typeIcon} ${goal.title}</h4>
-        ${goal.description ? `<p>${goal.description}</p>` : ''}
-        <div class="goal-meta">
-            <span style="color: ${priorityColor}">${goal.priority}</span>
-            <span>${dueDate}</span>
+        <div class="goal-card-content">
+            <h4>${typeIcon} ${goal.title}</h4>
+            ${goal.description ? `<p class="goal-description">${goal.description}</p>` : ''}
+            <div class="goal-meta">
+                <span class="goal-priority" style="color: ${priorityColor}">
+                    <i class="fas fa-circle"></i> ${goal.priority}
+                </span>
+                ${dueDate}
+            </div>
         </div>
         <div class="goal-actions">
             <button class="edit-goal" title="Edit"><i class="fas fa-edit"></i></button>
@@ -81,7 +86,7 @@ function createGoalCard(goal) {
         </div>
     `;
 
-    // Add event listeners to action buttons
+    // Add event listeners
     goalCard.querySelector('.edit-goal').addEventListener('click', () => editGoal(goal.id));
     goalCard.querySelector('.delete-goal').addEventListener('click', () => deleteGoal(goal.id));
 
