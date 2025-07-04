@@ -46,10 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initHabits();
     initJournal();
     initVisionBoard();
-
-    // Set user name if available
-    const userName = localStorage.getItem('userName') || 'User';
-    document.getElementById('user-name').textContent = userName;
 });
 
 // Dashboard Module
