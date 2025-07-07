@@ -70,24 +70,12 @@ a {
 .btn-primary {
     background-color: var(--primary);
     color: white;
-    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
 }
 
 .btn-secondary {
     background-color: white;
     color: var(--primary);
     border: 1px solid var(--primary-light);
-}
-
-.btn-secondary:hover {
-    background-color: var(--light);
-    transform: translateY(-2px);
 }
 
 /* Header */
@@ -386,11 +374,6 @@ header {
     position: relative;
 }
 
-.pricing-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 25px -5px var(--dark)
-}
-
 .pricing-card.popular {
     border: 2px solid var(--primary);
 }
@@ -430,79 +413,17 @@ header {
 
 /* Footer */
 footer {
-    background-color: var(--dark);
-    color: white;
-    padding: 4rem 0 2rem;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
-
-.footer-logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    color: white;
-}
-
-.footer-about p {
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 1.5rem;
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-}
-
-.social-links a {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.social-links a:hover {
     background-color: var(--primary);
-    transform: translateY(-3px);
-}
-
-.footer-links h4 {
-    color: white;
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-}
-
-.footer-links ul {
-    list-style: none;
-}
-
-.footer-links li {
-    margin-bottom: 0.8rem;
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.7);
-    transition: all 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: white;
-    padding-left: 5px;
+    padding: 4rem 0 1rem;   
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--light);
     padding-top: 2rem;
     text-align: center;
-    color: rgba(255, 255, 255, 0.5);
     font-size: 0.9rem;
+}
+
+.footer-bottom p {
+    color: var(--light);
 }
