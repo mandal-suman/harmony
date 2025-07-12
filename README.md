@@ -9,7 +9,6 @@ Harmony is a comprehensive productivity and goal tracking application developed 
 ### Key Highlights
 - Developed by a team of 3 students in 2 weeks
 - Frontend-only implementation with JavaScript-based authentication
-- Responsive design that works on all devices
 - 15+ pages covering all aspects of a productivity application
 
 ## Features (Frontend Only)
