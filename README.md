@@ -1,13 +1,13 @@
 # Harmony Productivity App - University SIP Project
 
-![Harmony Screenshot](image.png)
+![Harmony Screenshot](/assets/image.png)
 
 ## Overview
 
 Harmony is a comprehensive productivity and goal tracking application developed as part of our university's SIP (Summer Internship Program) project. This frontend-focused application helps users manage their tasks, goals, habits, and productivity metrics through an intuitive interface.
 
 ### Key Highlights
-- Developed by a team of 2 students over 8 weeks
+- Developed by a team of 3 students in 2 weeks
 - Frontend-only implementation with JavaScript-based authentication
 - Responsive design that works on all devices
 - 15+ pages covering all aspects of a productivity application
