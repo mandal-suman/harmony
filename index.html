@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harmony | Productivity & Goal Tracking App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 
 <body>
@@ -14,20 +14,43 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">
-                    <i class="fas fa-spa"></i>
-                    Harmony
-                </a>
-                <div class="nav-links">
+            <a href="index.html" class="logo">
+                <i class="fas fa-spa"></i>
+                Harmony
+            </a>
+            <div class="nav-links">
+                <div class="dropdown">
+                <a href="#" class="dropdown-toggle">Product</a>
+                <div class="dropdown-menu">
                     <a href="#features">Features</a>
                     <a href="#how-it-works">How It Works</a>
                     <a href="#pricing">Pricing</a>
                     <a href="#testimonials">Testimonials</a>
                 </div>
-                <div class="cta-buttons">
-                    <a href="login.html" class="btn btn-secondary">Log In</a>
-                    <a href="#" class="btn btn-primary">Get Started</a>
                 </div>
+                <div class="dropdown">
+                <a href="#" class="dropdown-toggle">Company</a>
+                <div class="dropdown-menu">
+                    <a href="/Hompage/Company/about.html">About Us</a>
+                    <a href="/Hompage/Company/career.html">Careers</a>
+                    <a href="/Hompage/Company/blog.html">Blog</a>
+                    <a href="/Hompage/Company/contact.html">Contact</a>
+                </div>
+                </div>
+                <div class="dropdown">
+                <a href="#" class="dropdown-toggle">Resources</a>
+                <div class="dropdown-menu">
+                    <a href="/Hompage/Resources/help-center.html">Help Center</a>
+                    <a href="/Hompage/Resources/community.html">Community</a>
+                    <a href="/Hompage/Resources/tutorials.html">Tutorials</a>
+                    <a href="/Hompage/Resources/webinars.html">Webinars</a>
+                </div>
+                </div>
+            </div>
+            <div class="cta-buttons">
+                <a href="login.html?action=login" class="btn btn-secondary">Log In</a>
+                <a href="login.html?action=register" class="btn btn-primary">Get Started</a>
+            </div>
             </nav>
         </div>
     </header>
@@ -44,13 +67,14 @@
                         <a href="#" class="btn btn-primary">
                             <i class="fab fa-apple"></i> Download for iOS
                         </a>
-                        <a href="https://play.google.com/store/apps/details?id=com.app.relaxcompletely&pcampaignid=web_share" class="btn btn-secondary">
+                        <a href="https://play.google.com/store/apps/details?id=com.app.relaxcompletely&pcampaignid=web_share"
+                            class="btn btn-secondary">
                             <i class="fab fa-google-play"></i> Get on Android
                         </a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="https://timeular.com/wp-content/uploads/2023/04/timeular-desktop_and_mobile_app_and_tracker.png"
+                    <img src="/assets/image.png"
                         alt="Harmony App Screenshot" class="app-image">
                 </div>
             </div>
@@ -193,7 +217,7 @@
                         <li><i class="fas fa-check"></i> Basic analytics</li>
                         <li><i class="fas fa-check"></i> 1 device sync</li>
                     </ul>
-                    <a href="#" class="btn btn-secondary">Get Started</a>
+                    <a href="login.html?action=register" class="btn btn-secondary">Get Started</a>
                 </div>
                 <div class="pricing-card popular">
                     <h3>Pro</h3>
@@ -224,11 +248,59 @@
     </section>
 
     <!-- Footer -->
+    <!-- Footer -->
     <footer>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Harmony. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <i class="fas fa-spa"></i> Harmony
+                    </div>
+                    <p>The all-in-one productivity app designed to help you achieve more while maintaining balance in
+                        your life.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How Harmony Works</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/Hompage/Company/about.html">About Us</a></li>
+                        <li><a href="/Hompage/Company/career.html">Careers</a></li>
+                        <li><a href="/Hompage/Company/blog.html">Blog</a></li>
+                        <li><a href="/Hompage/Company/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="/Hompage/Resources/help-center.html">Help Center</a></li>
+                        <li><a href="/Hompage/Resources/community.html">Community</a></li>
+                        <li><a href="/Hompage/Resources/tutorials.html">Tutorials</a></li>
+                        <li><a href="/Hompage/Resources/webinars.html">Webinars</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Harmony. All rights reserved. | <a href="/Hompage/Resources/privacy-policy.html">Privacy Policy</a> | <a href="/Hompage/Resources/terms-of-use.html">Terms of
+                        Service</a></p>
+            </div>
         </div>
     </footer>
+
+    <script src="js/auth.js"></script>
 </body>
 
 </html>

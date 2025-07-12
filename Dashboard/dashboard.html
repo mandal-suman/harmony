@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmony | Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="nav-links">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-spa"></i>
+                    <span>Harmony</span>
+                </div>
+            </div>
+            <a href="#dashboard" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Dashboard Home</span>
+            </a>
+            <a href="#habits" class="nav-item">
+                <i class="fas fa-history"></i>
+                <span>Habits</span>
+            </a>
+            <a href="#goals" class="nav-item">
+                <i class="fas fa-bullseye"></i>
+                <span>Goals</span>
+            </a>
+            <a href="#journals" class="nav-item">
+                <i class="fas fa-book"></i>
+                <span>Journals</span>
+            </a>
+            <a href="#tasks" class="nav-item">
+                <i class="fas fa-tasks"></i>
+                <span>Tasks</span>
+            </a>
+            <a href="#settings" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+
+            <div class="divider"></div>
+
+            <a href="#help" class="nav-item">
+                <i class="fas fa-question-circle"></i>
+                <span>Help & Support</span>
+            </a>
+
+            <button class="logout-btn" onclick="window.location.href='/index.html'">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Home -->
+        <div id="dashboard" class="page-content">
+            <div class="header">
+                <h1 class="page-title">Dashboard Overview</h1>
+                <div class="user-info">
+                    <div class="user-avatar">JS</div>
+                    <div>
+                        <div>John Smith</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Productivity Score</div>
+                        <div class="stat-icon" style="background-color: rgba(67, 97, 238, 0.1); color: var(--primary);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">82%</div>
+                    <div class="stat-change">
+                        <i class="fas fa-arrow-up"></i> 12% from last week
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Tasks Completed</div>
+                        <div class="stat-icon" style="background-color: rgba(46, 204, 113, 0.1); color: #2ecc71;">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">24/30</div>
+                    <div class="stat-change">
+                        <i class="fas fa-arrow-up"></i> 5 more than last week
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Active Habits</div>
+                        <div class="stat-icon" style="background-color: rgba(155, 89, 182, 0.1); color: #9b59b6;">
+                            <i class="fas fa-repeat"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value">7</div>
+                    <div class="stat-change">
+                        3 habits in progress
+                    </div>
+                </div>
+            </div>
+
+            <!-- Habits Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Your Habits</h2>
+                    <a href="#habits" class="view-all">View All</a>
+                </div>
+
+                <div class="habits-grid">
+                    <div class="habit-card">
+                        <div class="habit-name">Morning Meditation</div>
+                        <div>Daily at 7:00 AM</div>
+                        <div class="habit-progress">
+                            <div class="progress-bar" style="width: 90%"></div>
+                        </div>
+                        <div class="progress-text">90% success (27/30 days)</div>
+                    </div>
+
+                    <div class="habit-card">
+                        <div class="habit-name">Evening Journaling</div>
+                        <div>Daily at 9:00 PM</div>
+                        <div class="habit-progress">
+                            <div class="progress-bar" style="width: 70%"></div>
+                        </div>
+                        <div class="progress-text">70% success (21/30 days)</div>
+                    </div>
+
+                    <div class="habit-card">
+                        <div class="habit-name">Exercise</div>
+                        <div>Mon, Wed, Fri at 6:00 PM</div>
+                        <div class="habit-progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
+                        <div class="progress-text">85% success (11/13 sessions)</div>
+                    </div>
+
+                    <div class="habit-card">
+                        <div class="habit-name">Reading</div>
+                        <div>Daily at 8:00 PM</div>
+                        <div class="habit-progress">
+                            <div class="progress-bar" style="width: 65%"></div>
+                        </div>
+                        <div class="progress-text">65% success (19/30 days)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goals Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Current Goals</h2>
+                    <a href="#goals" class="view-all">View All</a>
+                </div>
+
+                <div class="goals-list">
+                    <div class="goal-item">
+                        <div class="goal-checkbox checked">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="goal-details">
+                            <div class="goal-title">Complete Project Proposal</div>
+                            <div class="goal-description">Finish and submit the client proposal</div>
+                        </div>
+                        <div class="goal-date">Today</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Learn JavaScript Framework</div>
+                            <div class="goal-description">Complete 3 chapters of React course</div>
+                        </div>
+                        <div class="goal-date">Tomorrow</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Schedule Team Meeting</div>
+                            <div class="goal-description">Plan Q3 objectives with the team</div>
+                        </div>
+                        <div class="goal-date">Jun 28</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Update Portfolio</div>
+                            <div class="goal-description">Add recent projects and achievements</div>
+                        </div>
+                        <div class="goal-date">Jul 1</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Journals Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Journal Entries</h2>
+                    <a href="#journals" class="view-all">View All</a>
+                </div>
+
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <div class="journal-date">June 25, 2023</div>
+                        <div class="journal-mood">Mood: <i class="fas fa-smile" style="color: #f1c40f;"></i> Productive
+                        </div>
+                    </div>
+                    <div class="journal-content">
+                        Today was a highly productive day. Finished the client proposal ahead of schedule and received
+                        positive feedback. Managed to complete all planned tasks and even had time for a workout
+                        session. Feeling accomplished and motivated for tomorrow's challenges.
+                    </div>
+                </div>
+
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <div class="journal-date">June 24, 2023</div>
+                        <div class="journal-mood">Mood: <i class="fas fa-meh" style="color: #e67e22;"></i> Tired</div>
+                    </div>
+                    <div class="journal-content">
+                        Had a slower day today. Felt a bit tired and struggled to focus in the afternoon. Took a short
+                        nap and managed to complete the most critical tasks. Need to improve my sleep schedule to
+                        maintain consistent energy levels throughout the day.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Habits Page (Hidden by default) -->
+        <div id="habits" class="page-content" style="display:none;">
+            <div class="header">
+                <h1 class="page-title">Habit Tracker</h1>
+                <div class="user-info">
+                    <div class="user-avatar">JS</div>
+                    <div>John Smith</div>
+                </div>
+            </div>
+
+            <div class="habit-form-container">
+                <div class="task-form">
+                    <h2 style="margin-bottom: 20px;">Create New Habit</h2>
+                    <div class="form-group">
+                        <label for="habit-name">Habit Name</label>
+                        <input type="text" id="habit-name" class="form-control" placeholder="Enter habit name">
+                    </div>
+                    <div class="form-group">
+                        <label for="habit-frequency">Frequency</label>
+                        <select id="habit-frequency" class="form-control">
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="habit-time">Time of Day</label>
+                        <select id="habit-time" class="form-control">
+                            <option value="morning">Morning</option>
+                            <option value="afternoon">Afternoon</option>
+                            <option value="evening">Evening</option>
+                            <option value="anytime">Anytime</option>
+                        </select>
+                    </div>
+                    <button class="btn">Create Habit</button>
+                </div>
+
+                <div>
+                    <div class="section">
+                        <div class="section-header">
+                            <h2 class="section-title">Active Habits</h2>
+                        </div>
+
+                        <div class="habits-grid">
+                            <div class="habit-card">
+                                <div class="habit-name">Morning Meditation</div>
+                                <div>Daily at 7:00 AM</div>
+                                <div class="habit-progress">
+                                    <div class="progress-bar" style="width: 90%"></div>
+                                </div>
+                                <div class="progress-text">90% success (27/30 days)</div>
+                            </div>
+
+                            <div class="habit-card">
+                                <div class="habit-name">Evening Journaling</div>
+                                <div>Daily at 9:00 PM</div>
+                                <div class="habit-progress">
+                                    <div class="progress-bar" style="width: 70%"></div>
+                                </div>
+                                <div class="progress-text">70% success (21/30 days)</div>
+                            </div>
+
+                            <div class="habit-card">
+                                <div class="habit-name">Exercise</div>
+                                <div>Mon, Wed, Fri at 6:00 PM</div>
+                                <div class="habit-progress">
+                                    <div class="progress-bar" style="width: 85%"></div>
+                                </div>
+                                <div class="progress-text">85% success (11/13 sessions)</div>
+                            </div>
+
+                            <div class="habit-card">
+                                <div class="habit-name">Reading</div>
+                                <div>Daily at 8:00 PM</div>
+                                <div class="habit-progress">
+                                    <div class="progress-bar" style="width: 65%"></div>
+                                </div>
+                                <div class="progress-text">65% success (19/30 days)</div>
+                            </div>
+
+                            <div class="habit-card">
+                                <div class="habit-name">No Social Media</div>
+                                <div>Before 12:00 PM</div>
+                                <div class="habit-progress">
+                                    <div class="progress-bar" style="width: 55%"></div>
+                                </div>
+                                <div class="progress-text">55% success (16/30 days)</div>
+                            </div>
+
+                            <div class="habit-card">
+                                <div class="habit-name">Drink Water</div>
+                                <div>8 glasses daily</div>
+                                <div class="habit-progress">
+                                    <div class="progress-bar" style="width: 80%"></div>
+                                </div>
+                                <div class="progress-text">80% success (24/30 days)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Goals Page (Hidden by default) -->
+        <div id="goals" class="page-content" style="display:none;">
+            <div class="header">
+                <h1 class="page-title">Goals & Objectives</h1>
+                <div class="user-info">
+                    <div class="user-avatar">JS</div>
+                    <div>John Smith</div>
+                </div>
+            </div>
+
+            <div class="task-form">
+                <h2 style="margin-bottom: 20px;">Set New Goal</h2>
+                <div class="form-group">
+                    <label for="goal-title">Goal Title</label>
+                    <input type="text" id="goal-title" class="form-control" placeholder="Enter goal title">
+                </div>
+                <div class="form-group">
+                    <label for="goal-description">Description</label>
+                    <textarea id="goal-description" class="form-control" rows="3"
+                        placeholder="Describe your goal"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="goal-date">Target Date</label>
+                    <input type="date" id="goal-date" class="form-control">
+                </div>
+                <button class="btn">Create Goal</button>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Current Goals</h2>
+                </div>
+
+                <div class="goals-list">
+                    <div class="goal-item">
+                        <div class="goal-checkbox checked">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="goal-details">
+                            <div class="goal-title">Complete Project Proposal</div>
+                            <div class="goal-description">Finish and submit the client proposal</div>
+                        </div>
+                        <div class="goal-date">Today</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Learn JavaScript Framework</div>
+                            <div class="goal-description">Complete 3 chapters of React course</div>
+                        </div>
+                        <div class="goal-date">Tomorrow</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Schedule Team Meeting</div>
+                            <div class="goal-description">Plan Q3 objectives with the team</div>
+                        </div>
+                        <div class="goal-date">Jun 28</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Update Portfolio</div>
+                            <div class="goal-description">Add recent projects and achievements</div>
+                        </div>
+                        <div class="goal-date">Jul 1</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Research Market Trends</div>
+                            <div class="goal-description">Identify emerging trends in our industry</div>
+                        </div>
+                        <div class="goal-date">Jul 5</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Complete Certification</div>
+                            <div class="goal-description">Finish AWS Cloud Practitioner course</div>
+                        </div>
+                        <div class="goal-date">Jul 15</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Journals Page (Hidden by default) -->
+        <div id="journals" class="page-content" style="display:none;">
+            <div class="header">
+                <h1 class="page-title">Journal Entries</h1>
+                <div class="user-info">
+                    <div class="user-avatar">JS</div>
+                    <div>John Smith</div>
+                </div>
+            </div>
+
+            <div class="task-form">
+                <h2 style="margin-bottom: 20px;">New Journal Entry</h2>
+                <div class="form-group">
+                    <label for="journal-title">Title</label>
+                    <input type="text" id="journal-title" class="form-control" placeholder="Entry title">
+                </div>
+                <div class="form-group">
+                    <label for="journal-content">Your Thoughts</label>
+                    <textarea id="journal-content" class="form-control" rows="5"
+                        placeholder="Write your thoughts here..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="journal-mood">Current Mood</label>
+                    <select id="journal-mood" class="form-control">
+                        <option value="happy">😊 Happy</option>
+                        <option value="excited">😃 Excited</option>
+                        <option value="neutral">😐 Neutral</option>
+                        <option value="tired">😴 Tired</option>
+                        <option value="stressed">😰 Stressed</option>
+                        <option value="sad">😔 Sad</option>
+                    </select>
+                </div>
+                <button class="btn">Save Entry</button>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Entries</h2>
+                </div>
+
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <div class="journal-date">June 25, 2023</div>
+                        <div class="journal-mood">Mood: <i class="fas fa-smile" style="color: #f1c40f;"></i> Productive
+                        </div>
+                    </div>
+                    <div class="journal-content">
+                        Today was a highly productive day. Finished the client proposal ahead of schedule and received
+                        positive feedback. Managed to complete all planned tasks and even had time for a workout
+                        session. Feeling accomplished and motivated for tomorrow's challenges.
+                    </div>
+                </div>
+
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <div class="journal-date">June 24, 2023</div>
+                        <div class="journal-mood">Mood: <i class="fas fa-meh" style="color: #e67e22;"></i> Tired</div>
+                    </div>
+                    <div class="journal-content">
+                        Had a slower day today. Felt a bit tired and struggled to focus in the afternoon. Took a short
+                        nap and managed to complete the most critical tasks. Need to improve my sleep schedule to
+                        maintain consistent energy levels throughout the day.
+                    </div>
+                </div>
+
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <div class="journal-date">June 22, 2023</div>
+                        <div class="journal-mood">Mood: <i class="fas fa-smile-beam" style="color: #2ecc71;"></i>
+                            Excited</div>
+                    </div>
+                    <div class="journal-content">
+                        Had a great meeting with the team about the new project. Everyone seems enthusiastic about the
+                        direction we're taking. Came up with some innovative solutions to the challenges we've been
+                        facing. Looking forward to seeing how this project develops.
+                    </div>
+                </div>
+
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <div class="journal-date">June 20, 2023</div>
+                        <div class="journal-mood">Mood: <i class="fas fa-frown" style="color: #e74c3c;"></i> Stressed
+                        </div>
+                    </div>
+                    <div class="journal-content">
+                        Feeling overwhelmed with deadlines today. Too many projects converging at the same time. Need to
+                        prioritize and delegate some tasks. Took a short walk to clear my head which helped somewhat.
+                        Will try to tackle one thing at a time tomorrow.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks Page (Hidden by default) -->
+        <div id="tasks" class="page-content" style="display:none;">
+            <div class="header">
+                <h1 class="page-title">Task Management</h1>
+                <div class="user-info">
+                    <div class="user-avatar">JS</div>
+                    <div>John Smith</div>
+                </div>
+            </div>
+
+            <div class="task-form">
+                <h2 style="margin-bottom: 20px;">Create New Task</h2>
+                <div class="form-group">
+                    <label for="task-title">Task Title</label>
+                    <input type="text" id="task-title" class="form-control" placeholder="Enter task title">
+                </div>
+                <div class="form-group">
+                    <label for="task-description">Description</label>
+                    <textarea id="task-description" class="form-control" rows="2" placeholder="Task details"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="task-date">Due Date</label>
+                    <input type="date" id="task-date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="task-priority">Priority</label>
+                    <select id="task-priority" class="form-control">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <button class="btn">Add Task</button>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Today's Tasks</h2>
+                </div>
+
+                <div class="goals-list">
+                    <div class="goal-item">
+                        <div class="goal-checkbox checked">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="goal-details">
+                            <div class="goal-title">Email client project update</div>
+                            <div class="goal-description">Send progress report to client</div>
+                        </div>
+                        <div class="goal-date">High</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Team standup meeting</div>
+                            <div class="goal-description">Daily 10am standup with development team</div>
+                        </div>
+                        <div class="goal-date">Medium</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Review design mockups</div>
+                            <div class="goal-description">Provide feedback on new UI designs</div>
+                        </div>
+                        <div class="goal-date">High</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Schedule interviews</div>
+                            <div class="goal-description">Arrange interviews for new positions</div>
+                        </div>
+                        <div class="goal-date">Medium</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Upcoming Tasks</h2>
+                </div>
+
+                <div class="goals-list">
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Prepare quarterly presentation</div>
+                            <div class="goal-description">Create slides for executive meeting</div>
+                        </div>
+                        <div class="goal-date">Tomorrow</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Update project documentation</div>
+                            <div class="goal-description">Document recent API changes</div>
+                        </div>
+                        <div class="goal-date">Jun 28</div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-checkbox"></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Renew software licenses</div>
+                            <div class="goal-description">Check and renew expiring licenses</div>
+                        </div>
+                        <div class="goal-date">Jun 30</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Page (Hidden by default) -->
+        <div id="settings" class="page-content" style="display:none;">
+            <div class="header">
+                <h1 class="page-title">Account Settings</h1>
+                <div class="user-info">
+                    <div class="user-avatar">JS</div>
+                    <div>John Smith</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 style="margin-bottom: 24px;">Profile Settings</h2>
+
+                <div class="form-group">
+                    <label for="user-name">Full Name</label>
+                    <input type="text" id="user-name" class="form-control" value="John Smith">
+                </div>
+
+                <div class="form-group">
+                    <label for="user-email">Email Address</label>
+                    <input type="email" id="user-email" class="form-control" value="john.smith@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="user-timezone">Time Zone</label>
+                    <select id="user-timezone" class="form-control">
+                        <option>(GMT-12:00) International Date Line West</option>
+                        <option>(GMT-11:00) Midway Island, Samoa</option>
+                        <option>(GMT-10:00) Hawaii</option>
+                        <option>(GMT-09:00) Alaska</option>
+                        <option>(GMT-08:00) Pacific Time (US & Canada)</option>
+                        <option>(GMT-07:00) Mountain Time (US & Canada)</option>
+                        <option selected>(GMT-06:00) Central Time (US & Canada)</option>
+                        <option>(GMT-05:00) Eastern Time (US & Canada)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-theme">Theme Preference</label>
+                    <select id="user-theme" class="form-control">
+                        <option selected>Light Theme</option>
+                        <option>Dark Theme</option>
+                        <option>System Default</option>
+                    </select>
+                </div>
+
+                <button class="btn">Update Profile</button>
+            </div>
+
+            <div class="section">
+                <h2 style="margin-bottom: 24px;">Notification Settings</h2>
+
+                <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
+                    <label for="notify-email">Email Notifications</label>
+                    <input type="checkbox" id="notify-email" checked style="transform: scale(1.5);">
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
+                    <label for="notify-push">Push Notifications</label>
+                    <input type="checkbox" id="notify-push" checked style="transform: scale(1.5);">
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
+                    <label for="notify-reminders">Habit Reminders</label>
+                    <input type="checkbox" id="notify-reminders" checked style="transform: scale(1.5);">
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
+                    <label for="notify-goals">Goal Reminders</label>
+                    <input type="checkbox" id="notify-goals" checked style="transform: scale(1.5);">
+                </div>
+
+                <button class="btn">Save Preferences</button>
+            </div>
+        </div>
+
+        <!-- Help Page (Hidden by default) -->
+        <div id="help" class="page-content" style="display:none;">
+            <div class="header">
+                <h1 class="page-title">Help & Support</h1>
+                <div class="user-info">
+                    <div class="user-avatar">JS</div>
+                    <div>John Smith</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 style="margin-bottom: 24px;">Frequently Asked Questions</h2>
+
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <div class="journal-date">How do I create a new habit?</div>
+                    </div>
+                    <div class="journal-content">
+                        To create a new habit, navigate to the Habits section and click the "Create New Habit" button.
+                        Fill in the habit name, frequency, and preferred time of day. Your habit will then appear in
+                        your habit tracker with a progress bar.
+                    </div>
+                </div>
+
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <div class="journal-date">Can I edit or delete a goal?</div>
+                    </div>
+                    <div class="journal-content">
+                        Yes, you can edit or delete any goal. In the Goals section, click on the three-dot menu next to
+                        any goal to access editing options. You can modify the title, description, due date, or delete
+                        the goal entirely.
+                    </div>
+                </div>
+
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <div class="journal-date">How is my productivity score calculated?</div>
+                    </div>
+                    <div class="journal-content">
+                        Your productivity score is based on several factors including task completion rate, habit
+                        consistency, goal progress, and journaling frequency. The algorithm weighs recent activity more
+                        heavily to provide an up-to-date assessment of your productivity.
+                    </div>
+                </div>
+
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <div class="journal-date">Is my data private and secure?</div>
+                    </div>
+                    <div class="journal-content">
+                        Absolutely. We take your privacy seriously. All your data is encrypted both in transit and at
+                        rest. We never share your personal information with third parties, and you have full control
+                        over your data at all times.
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 style="margin-bottom: 24px;">Contact Support</h2>
+
+                <div class="form-group">
+                    <label for="support-subject">Subject</label>
+                    <input type="text" id="support-subject" class="form-control" placeholder="Enter subject">
+                </div>
+
+                <div class="form-group">
+                    <label for="support-message">Message</label>
+                    <textarea id="support-message" class="form-control" rows="5"
+                        placeholder="Describe your issue or question"></textarea>
+                </div>
+
+                <button class="btn">Send Message</button>
+
+                <div style="margin-top: 20px;">
+                    <p>Alternatively, you can email us directly at: <strong>support@productivityapp.com</strong></p>
+                    <p>Our team typically responds within 24 hours on business days.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+
+</html>

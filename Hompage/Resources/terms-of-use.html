@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Use | Harmony</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/pages.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #6366F1;
+            --primary-dark: #4F46E5;
+            --primary-light: #818CF8;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #1E293B;
+            --light: #F8FAFC;
+            --text: #334155;
+            --text-light: #64748B;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 7rem 0 3rem;
+            background: linear-gradient(135deg, #F9FAFB 0%, #F0F4F8 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, rgba(99, 102, 241, 0) 70%);
+            z-index: 0;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .last-updated {
+            background-color: var(--light);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Terms Content */
+        .terms-content {
+            padding: 4rem 0;
+        }
+
+        .terms-section {
+            margin-bottom: 3rem;
+        }
+
+        .terms-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--light);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .terms-section h3 {
+            color: var(--primary-dark);
+            margin: 1.8rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .terms-points {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .terms-points li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        .terms-points li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .highlight-box {
+            background-color: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+
+        .acceptance-box {
+            background-color: var(--light);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .acceptance-box h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="/index.html" class="logo">
+                    <i class="fas fa-spa"></i>
+                    Harmony
+                </a>
+                <div class="nav-links">
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle">Product</a>
+                        <div class="dropdown-menu">
+                            <a href="#features">Features</a>
+                            <a href="#how-it-works">How It Works</a>
+                            <a href="#pricing">Pricing</a>
+                            <a href="#testimonials">Testimonials</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle">Company</a>
+                        <div class="dropdown-menu">
+                            <a href="/Hompage/Company/about.html">About Us</a>
+                            <a href="/Hompage/Company/career.html">Careers</a>
+                            <a href="/Hompage/Company/blog.html">Blog</a>
+                            <a href="/Hompage/Company/contact.html">Contact</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle">Resources</a>
+                        <div class="dropdown-menu">
+                            <a href="/Hompage/Resources/help-center.html">Help Center</a>
+                            <a href="/Hompage/Resources/community.html">Community</a>
+                            <a href="/Hompage/Resources/tutorials.html">Tutorials</a>
+                            <a href="/Hompage/Resources/webinars.html">Webinars</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cta-buttons">
+                    <a href="/login.html?action=login" class="btn btn-secondary">Log In</a>
+                    <a href="/login.html?action=register" class="btn btn-primary">Get Started</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Terms of Service</h1>
+            <p>These terms govern your use of Harmony's productivity and goal tracking services. Please read them
+                carefully.</p>
+            <div class="last-updated">
+                <i class="fas fa-history"></i> Last updated: July 13, 2025
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms Content -->
+    <section class="terms-content">
+        <div class="container">
+            <div class="acceptance-box">
+                <h3><i class="fas fa-check-circle"></i> By using Harmony, you agree to these Terms of Service</h3>
+                <p>These terms constitute a legally binding agreement between you and Harmony regarding your use of our
+                    services.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-file-contract"></i> 1. Introduction</h2>
+                <p>Harmony Productivity App ("Harmony", "we", "us", or "our") provides productivity and goal tracking
+                    services through our application and website (collectively, the "Service"). These Terms of Service
+                    ("Terms") govern your access to and use of the Service.</p>
+                <p>By accessing or using the Service, you agree to be bound by these Terms. If you do not agree to these
+                    Terms, you may not use the Service.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-user-check"></i> 2. Account Registration</h2>
+
+                <h3><i class="fas fa-user-circle"></i> 2.1 Eligibility</h3>
+                <p>To use our Service, you must be at least 16 years old. By using Harmony, you represent and warrant
+                    that you meet this age requirement.</p>
+
+                <h3><i class="fas fa-key"></i> 2.2 Account Security</h3>
+                <p>You are responsible for maintaining the confidentiality of your account credentials and for all
+                    activities that occur under your account. You agree to immediately notify us of any unauthorized use
+                    of your account.</p>
+
+                <h3><i class="fas fa-info-circle"></i> 2.3 Accurate Information</h3>
+                <p>You agree to provide accurate, current, and complete information during the registration process and
+                    to update such information to keep it accurate, current, and complete.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-tasks"></i> 3. Use of Service</h2>
+
+                <h3><i class="fas fa-check"></i> 3.1 Permitted Use</h3>
+                <p>We grant you a limited, non-exclusive, non-transferable, and revocable license to use our Service for
+                    your personal or business productivity purposes.</p>
+
+                <h3><i class="fas fa-ban"></i> 3.2 Prohibited Activities</h3>
+                <p>You agree not to:</p>
+                <ul class="terms-points">
+                    <li>Use the Service for any illegal purpose or in violation of any laws</li>
+                    <li>Violate or encourage others to violate the rights of third parties</li>
+                    <li>Interfere with security-related features of the Service</li>
+                    <li>Attempt to reverse engineer, decompile, or disassemble the Service</li>
+                    <li>Use the Service to transmit viruses or other malicious code</li>
+                    <li>Use automated systems (bots) to access the Service</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-credit-card"></i> 4. Payments and Subscriptions</h2>
+
+                <h3><i class="fas fa-sync-alt"></i> 4.1 Subscription Plans</h3>
+                <p>Harmony offers both free and premium subscription plans. Premium plans are billed on a recurring
+                    basis (monthly or annually) until cancelled.</p>
+
+                <h3><i class="fas fa-receipt"></i> 4.2 Payment Authorization</h3>
+                <p>By providing a payment method, you authorize us to charge the applicable subscription fees to that
+                    payment method.</p>
+
+                <h3><i class="fas fa-ban"></i> 4.3 Cancellation</h3>
+                <p>You may cancel your premium subscription at any time. Cancellation will take effect at the end of
+                    your current billing cycle.</p>
+
+                <h3><i class="fas fa-undo"></i> 4.4 Refunds</h3>
+                <p>Subscription fees are non-refundable except as required by law or at our sole discretion.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3><i class="fas fa-exclamation-triangle"></i> Important: Free Trial Terms</h3>
+                <p>If you sign up for a free trial, your subscription will automatically convert to a paid subscription
+                    at the end of the trial period unless you cancel before the trial ends. You will be charged the
+                    applicable subscription fee at that time.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-copyright"></i> 5. Intellectual Property</h2>
+
+                <h3><i class="fas fa-crown"></i> 5.1 Harmony's Rights</h3>
+                <p>All rights, title, and interest in and to the Service (including all software, designs, text,
+                    graphics, and other content) are and will remain the exclusive property of Harmony and its
+                    licensors.</p>
+
+                <h3><i class="fas fa-pen"></i> 5.2 Your Content</h3>
+                <p>You retain ownership of any content you create or upload to the Service. By using Harmony, you grant
+                    us a worldwide, non-exclusive license to host, store, reproduce, and display your content solely for
+                    the purpose of providing the Service to you.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-user-shield"></i> 6. Privacy</h2>
+                <p>Your privacy is important to us. Our Privacy Policy explains how we collect, use, and share your
+                    personal information. By using the Service, you agree to our Privacy Policy.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-gavel"></i> 7. Termination</h2>
+
+                <h3><i class="fas fa-power-off"></i> 7.1 By You</h3>
+                <p>You may stop using our Service at any time.</p>
+
+                <h3><i class="fas fa-ban"></i> 7.2 By Harmony</h3>
+                <p>We may suspend or terminate your access to the Service at any time for any reason, including if you
+                    violate these Terms.</p>
+
+                <h3><i class="fas fa-cloud-download-alt"></i> 7.3 Effect of Termination</h3>
+                <p>Upon termination, your right to use the Service will immediately cease. We may delete your data after
+                    termination according to our data retention policy.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-shield-alt"></i> 8. Disclaimers and Limitations</h2>
+
+                <h3><i class="fas fa-exclamation-circle"></i> 8.1 Service "As Is"</h3>
+                <p>The Service is provided "as is" without warranties of any kind, either express or implied. We do not
+                    warrant that the Service will be uninterrupted, secure, or error-free.</p>
+
+                <h3><i class="fas fa-chart-line"></i> 8.2 Results Not Guaranteed</h3>
+                <p>Harmony does not guarantee any specific results from use of the Service. Your productivity and goal
+                    achievement depend on many factors, including your personal commitment and effort.</p>
+
+                <h3><i class="fas fa-balance-scale"></i> 8.3 Limitation of Liability</h3>
+                <p>To the maximum extent permitted by law, Harmony shall not be liable for any indirect, incidental,
+                    special, consequential, or punitive damages arising from your use of the Service.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-globe-americas"></i> 9. Governing Law</h2>
+                <p>These Terms shall be governed by and construed in accordance with the laws of the State of
+                    California, without regard to its conflict of law principles.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-sync-alt"></i> 10. Changes to Terms</h2>
+                <p>We may modify these Terms at any time. We will notify you of significant changes through the Service
+                    or by email. Your continued use of the Service after such changes constitutes your acceptance of the
+                    new Terms.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2><i class="fas fa-envelope"></i> 11. Contact Information</h2>
+                <p>If you have any questions about these Terms, please contact us:</p>
+                <ul class="terms-points">
+                    <li>By email: legal@harmonyapp.com</li>
+                    <li>By mail: Harmony Legal Department, 123 Productivity Lane, San Francisco, CA 94107</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <i class="fas fa-spa"></i> Harmony
+                    </div>
+                    <p>The all-in-one productivity app designed to help you achieve more while maintaining balance in
+                        your life.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="/index.html#fetures">Features</a></li>
+                        <li><a href="/index.html#how-it-works">How Harmony Works</a></li>
+                        <li><a href="/index.html#testimonials">Testimonials</a></li>
+                        <li><a href="/index.html#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/Hompage/Company/about.html">About Us</a></li>
+                        <li><a href="/Hompage/Company/career.html">Careers</a></li>
+                        <li><a href="/Hompage/Company/blog.html">Blog</a></li>
+                        <li><a href="/Hompage/Company/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="/Hompage/Resources/help-center.html">Help Center</a></li>
+                        <li><a href="/Hompage/Resources/community.html">Community</a></li>
+                        <li><a href="/Hompage/Resources/tutorials.html">Tutorials</a></li>
+                        <li><a href="/Hompage/Resources/webinars.html">Webinars</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Harmony. All rights reserved. | <a href="/Hompage/Resources/privacy-policy.html">Privacy
+                        Policy</a> | <a href="/Hompage/Resources/terms-of-use.html">Terms of
+                        Service</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
