@@ -3,7 +3,7 @@ let users = JSON.parse(localStorage.getItem('harmony_credentials')) || [
     {
         id: 1,
         name: "Demo User",
-        email: "demouser@harmony.com",
+        email: "user@project-harmony.netlify.app",
         password: "90wu9y78gy",
         createdAt: new Date().toISOString()
     }
